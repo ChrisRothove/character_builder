@@ -5,6 +5,7 @@ import { useState } from "react";
 import CharacterPanel from "@components/sections/CharacterPanel";
 import DeckPanel from "@components/sections/DeckPanel";
 import AdvPanel from "@components/sections/AdvPanel";
+import StatPanel from "@components/sections/StatPanel";
 
 type MenuLayoutProps = {
   characters: Array<Character>;
@@ -78,6 +79,12 @@ export default function MenuLayout({
         )}
         {menuPage === MenuPage.ADVANCEMENTS && (
           <AdvPanel
+            character={currentCharacter}
+            updateCharacter={updateCharacter}
+          />
+        )}
+        {menuPage === MenuPage.STATS && (
+          <StatPanel
             character={currentCharacter}
             updateCharacter={updateCharacter}
           />

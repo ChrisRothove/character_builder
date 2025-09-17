@@ -27,7 +27,9 @@ export default function CharacterPanel({ character }: CharacterPanelProps) {
           </div>
           <div className="char-stat-line">
             <span className="stat-name">DECK</span>
-            <span className="stat-value">{character.resources.ds}</span>
+            <span className="stat-value">
+              {character.advancements.plusDeck + 2}
+            </span>
           </div>
           <div className="char-stat-line">
             <span className="stat-name">PRV</span>

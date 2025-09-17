@@ -2,6 +2,7 @@ type CounterInputProps = {
   name: string;
   value: number;
   max: number;
+  increment?: number;
   onChange: (newValue: number) => void;
 };
 
@@ -10,15 +11,16 @@ export default function CounterInput({
   value,
   max,
   onChange,
+  increment = 1,
 }: CounterInputProps) {
   const plusOne = () => {
     if (value + 1 <= max) {
-      onChange(value + 1);
+      onChange(value + increment);
     }
   };
   const minusOne = () => {
     if (value - 1 >= 0) {
-      onChange(value - 1);
+      onChange(value - increment);
     }
   };
   return (

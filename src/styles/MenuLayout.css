@@ -185,12 +185,17 @@
   border-radius: 0.5rem 0 0.5rem 0;
   border: 1px outset var(--bright-blue);
 }
+.command-list-item select {
+  width: 100px;
+  font-family: "lubrifont", sans-serif;
+  font-size: medium;
+}
 
 .adv-panel {
   flex-grow: 1;
 }
 .counter-buttons {
-  width: 80px;
+  width: 100px;
   display: flex;
   flex-direction: row;
   align-items: center;

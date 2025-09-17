@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Character } from "@app-types/character";
-import { Origin } from "@app-types/enums";
+import { Origin, StatValue } from "@app-types/enums";
 import { useEffect, useState } from "react";
 
 const LS_KEY = 'characters'
@@ -21,12 +21,12 @@ const DEFAULT_CHARACTER: Character = {
     adv: 5
   },
   stats: {
-    strength: 'd8',
-    magic: 'd8',
-    defense: 'd8',
-    agility: 'd10'
+    strength: StatValue.d8,
+    magic: StatValue.d8,
+    defense: StatValue.d8,
+    agility: StatValue.d10
   },
-  provisionDice: 'd6',
+  provisionDice: StatValue.d6,
   commands: [],
   weaknesses: [],
   resistances: [],
@@ -68,7 +68,7 @@ export default function useCharacters(characterData: {characters: Array<Characte
 
   const updateCharacter = <K extends keyof Character>(key: K, value: Character[K]): void => {
     const localStorageCharacters = getLocalCharacters();
-    console.log(localStorageCharacters)
+    console.log(key, value)
     const newCharacter: Character = {
       ...localStorageCharacters[index],
       [key]: value

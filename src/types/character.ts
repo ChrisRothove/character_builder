@@ -1,4 +1,4 @@
-import { Stat, Origin, Ailment, Element } from "./enums";
+import { Stat, Origin, WeakRes, StatValue } from "./enums";
 
 export type Command = {
   name: string;
@@ -48,15 +48,15 @@ export type Character = {
     adv: number;
   };
   stats: {
-    strength: string;
-    magic: string;
-    defense: string;
-    agility: string;
+    strength: StatValue;
+    magic: StatValue;
+    defense: StatValue;
+    agility: StatValue;
   };
-  weaknesses: Array<Ailment | Element>;
-  resistances: Array<Ailment | Element>;
+  weaknesses: Array<WeakRes>;
+  resistances: Array<WeakRes>;
   masteries: Array<Mastery>;
-  provisionDice: string;
+  provisionDice: StatValue;
   advancements: {
     hpOrIp: number;
     statIncrease: number;

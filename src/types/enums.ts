@@ -12,37 +12,35 @@ export enum Stat {
 }
 
 export enum StatValue {
-  'd4',
-  'd6',
-  'd8',
-  'd10',
-  'd12'
+  d4 = 'd4',
+  d6 = 'd6',
+  d8 = 'd8',
+  d10 = 'd10',
+  d12 = 'd12'
 }
 
-export enum Element {
-  'Fire',
-  'Ice',
-  'Thunder',
-  'Wind',
-  'Water',
-  'Earth',
-  'Light',
-  'Dark',
-  'Poison',
-  'Gravity',
-  'Time',
-  'Psychic'
-}
-
-export enum Ailment {
-  'DoT',
-  'Weaken',
-  'Berserk',
-  'Panic',
-  'Dispel',
-  'Slow',
-  'Stun',
-  'Sunder',
-  'Silence',
-  'Zombie'
+export enum WeakRes {
+  None = 'None',
+  Fire = 'Fire',
+  Ice = 'Ice',
+  Thunder = 'Thunder',
+  Wind = 'Wind',
+  Water = 'Water',
+  Earth = 'Earth',
+  Light = 'Light',
+  Dark = 'Dark',
+  Poison = 'Poison',
+  Gravity = 'Gravity',
+  Time = 'Time',
+  Psychic = 'Psychic',
+  DoT = 'DoT',
+  Weaken = 'Weaken',
+  Berserk = 'Berserk',
+  Panic = 'Panic',
+  Dispel = 'Dispel',
+  Slow = 'Slow',
+  Stun = 'Stun',
+  Sunder = 'Sunder',
+  Silence = 'Silence',
+  Zombie = 'Zombie'
 }
