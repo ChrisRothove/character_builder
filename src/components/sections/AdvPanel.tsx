@@ -1,5 +1,6 @@
 import { Character } from "@app-types/character";
 import CounterInput from "./inputs/CounterInput";
+import { getTotalAdvancements } from "utils/getTotalAdvancements";
 
 export default function AdvPanel({
   character,
@@ -29,13 +30,13 @@ export default function AdvPanel({
     critProvision,
   } = character.advancements;
 
-  const changeAdvancements = (key: string, newValue: number) => {
+  const changeAdvancements = async (key: string, newValue: number) => {
     const newAdvancements = {
       ...character.advancements,
       [key]: newValue,
     };
 
-    updateCharacter("advancements", newAdvancements);
+    await updateCharacter("advancements", newAdvancements);
   };
 
   return (
@@ -129,7 +130,7 @@ export default function AdvPanel({
       <CounterInput
         name="+1 Resistance"
         value={critResist}
-        max={1}
+        max={2}
         onChange={(newValue) => changeAdvancements("critResist", newValue)}
       />
       <CounterInput
@@ -141,10 +142,7 @@ export default function AdvPanel({
       <div className="command-list-item">
         <span>Total</span>
         <span>
-          {Object.values(character.advancements).reduce(
-            (prv, cur) => prv + cur,
-            0
-          )}
+          {getTotalAdvancements(character)}
           /50
         </span>
       </div>

@@ -11,6 +11,14 @@ export enum Stat {
   'AGL'
 }
 
+export enum StatValue {
+  'd4',
+  'd6',
+  'd8',
+  'd10',
+  'd12'
+}
+
 export enum Element {
   'Fire',
   'Ice',

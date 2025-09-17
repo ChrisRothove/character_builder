@@ -1,6 +1,6 @@
 import useCharacters from "@components/hooks/useCharacters";
-import "@styles/MenuLayout.css"
-import { Character } from "@app-types/character"
+import "@styles/MenuLayout.css";
+import { Character } from "@app-types/character";
 import { useState } from "react";
 import CharacterPanel from "@components/sections/CharacterPanel";
 import DeckPanel from "@components/sections/DeckPanel";
@@ -9,42 +9,45 @@ import AdvPanel from "@components/sections/AdvPanel";
 type MenuLayoutProps = {
   characters: Array<Character>;
   setCharacters: (characters: Array<Character>) => void;
-}
+};
 
 enum MenuPage {
-  HOME = '',
-  ADVANCEMENTS = '- Advancements',
-  STATS = '- Stats',
-  MASTERIES = '- Masteries',
-  STYLE = '- Style',
-  COMMANDS = '- Commands',
-  PROVISIONS = '- Provisions',
-  LINKS = '- Links',
-  JOURNAL = '- Journal',
-  CONFIG = '- Config',
-  DATA = '- Data'
+  HOME = "",
+  ADVANCEMENTS = "- Advancements",
+  STATS = "- Stats",
+  MASTERIES = "- Masteries",
+  STYLE = "- Style",
+  COMMANDS = "- Commands",
+  PROVISIONS = "- Provisions",
+  LINKS = "- Links",
+  JOURNAL = "- Journal",
+  CONFIG = "- Config",
+  DATA = "- Data",
 }
 
-export default function MenuLayout({ characters, setCharacters }: MenuLayoutProps) {
+export default function MenuLayout({
+  characters,
+  setCharacters,
+}: MenuLayoutProps) {
   const [menuPage, setMenuPage] = useState(MenuPage.HOME);
   const setNewPage = (newPage: MenuPage) => {
     return () => {
       if (menuPage === newPage) {
-        setMenuPage(MenuPage.HOME)
+        setMenuPage(MenuPage.HOME);
       } else {
-        setMenuPage(newPage)
+        setMenuPage(newPage);
       }
-    }
-  }
+    };
+  };
   const {
     updateCharacter,
     // getCharacterData,
     // selectCharacter,
-    currentCharacter
+    currentCharacter,
   } = useCharacters({
     characters,
-    setCharacters
-  })
+    setCharacters,
+  });
   return (
     <main className="menu-wrapper">
       <header className="menu-header">
@@ -53,7 +56,10 @@ export default function MenuLayout({ characters, setCharacters }: MenuLayoutProp
       </header>
       <section className="menu-body">
         <article className="opt-buttons">
-          <button onClick={setNewPage(MenuPage.ADVANCEMENTS)}>Advancements</button>
+          <button onClick={setNewPage(MenuPage.HOME)}>Home</button>
+          <button onClick={setNewPage(MenuPage.ADVANCEMENTS)}>
+            Advancements
+          </button>
           <button onClick={setNewPage(MenuPage.STATS)}>Stats</button>
           <button onClick={setNewPage(MenuPage.MASTERIES)}>Masteries</button>
           <button onClick={setNewPage(MenuPage.STYLE)}>Style</button>
@@ -64,11 +70,22 @@ export default function MenuLayout({ characters, setCharacters }: MenuLayoutProp
           <button onClick={setNewPage(MenuPage.CONFIG)}>Config</button>
           <button onClick={setNewPage(MenuPage.DATA)}>Data</button>
         </article>
-        {menuPage === MenuPage.HOME && <CharacterPanel character={currentCharacter} />}
-        {menuPage === MenuPage.HOME && <DeckPanel character={currentCharacter} />} 
-        {menuPage === MenuPage.ADVANCEMENTS && <AdvPanel character={currentCharacter} updateCharacter={updateCharacter} />}
+        {menuPage === MenuPage.HOME && (
+          <CharacterPanel character={currentCharacter} />
+        )}
+        {menuPage === MenuPage.HOME && (
+          <DeckPanel character={currentCharacter} />
+        )}
+        {menuPage === MenuPage.ADVANCEMENTS && (
+          <AdvPanel
+            character={currentCharacter}
+            updateCharacter={updateCharacter}
+          />
+        )}
       </section>
-      <footer className="menu-footer"><p>Choose a Sub-menu.</p></footer>
+      <footer className="menu-footer">
+        <p>Choose a Sub-menu.</p>
+      </footer>
     </main>
-  )
+  );
 }
