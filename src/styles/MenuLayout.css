@@ -201,3 +201,25 @@
   align-items: center;
   justify-content: space-between;
 }
+
+.new-button {
+  width: 97%;
+  margin: 0.5rem;
+  padding: 0 0.4rem;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: center;
+  background: linear-gradient(transparent 35%, var(--dark-blue) 100%);
+  border-radius: 0.5rem 0 0.5rem 0;
+  border-top: 1px outset var(--aqua-blue);
+  text-align: center;
+  border-style: solid;
+  padding-inline: 0.4rem;
+  color: var(--aqua-blue);
+  font-size: larger;
+}
+.new-button:hover {
+  background: linear-gradient(transparent, crimson);
+  border: 1px outset crimson;
+}

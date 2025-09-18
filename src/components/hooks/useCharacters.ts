@@ -28,6 +28,7 @@ const DEFAULT_CHARACTER: Character = {
   },
   provisionDice: StatValue.d6,
   commands: [],
+  provisions: [],
   weaknesses: [],
   resistances: [],
   masteries: [],

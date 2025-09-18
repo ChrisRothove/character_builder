@@ -6,6 +6,10 @@ import CharacterPanel from "@components/sections/CharacterPanel";
 import DeckPanel from "@components/sections/DeckPanel";
 import AdvPanel from "@components/sections/AdvPanel";
 import StatPanel from "@components/sections/StatPanel";
+import { MasteriesPanel } from "@components/sections/MasteriesPanel";
+import { StylePanel } from "@components/sections/StylePanel";
+import { CommandsPanel } from "@components/sections/CommandsPanel";
+import { ProvisionsPanel } from "@components/sections/ProvisionsPanel";
 
 type MenuLayoutProps = {
   characters: Array<Character>;
@@ -85,6 +89,30 @@ export default function MenuLayout({
         )}
         {menuPage === MenuPage.STATS && (
           <StatPanel
+            character={currentCharacter}
+            updateCharacter={updateCharacter}
+          />
+        )}
+        {menuPage === MenuPage.MASTERIES && (
+          <MasteriesPanel
+            character={currentCharacter}
+            updateCharacter={updateCharacter}
+          />
+        )}
+        {menuPage === MenuPage.STYLE && (
+          <StylePanel
+            character={currentCharacter}
+            updateCharacter={updateCharacter}
+          />
+        )}
+        {menuPage === MenuPage.COMMANDS && (
+          <CommandsPanel
+            character={currentCharacter}
+            updateCharacter={updateCharacter}
+          />
+        )}
+        {menuPage === MenuPage.PROVISIONS && (
+          <ProvisionsPanel
             character={currentCharacter}
             updateCharacter={updateCharacter}
           />

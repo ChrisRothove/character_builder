@@ -5,10 +5,11 @@ export enum Origin {
 }
 
 export enum Stat {
-  'STR',
-  'MAG',
-  'DEF',
-  'AGL'
+  NONE = 'None',
+  STR = 'STR',
+  MAG = 'MAG',
+  DEF = 'DEF',
+  AGL = 'AGL'
 }
 
 export enum StatValue {

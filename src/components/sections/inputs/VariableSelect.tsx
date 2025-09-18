@@ -25,16 +25,16 @@ export function VariableSelect<T extends string>({
   console.log(value.length, count);
   // make sure value is equal to valid count, if not adjust
   if (value.length < count) {
-    const newValue = value;
+    const newValue = [...value];
     const fieldsToAdd = count - value.length;
     for (let i = 0; i < fieldsToAdd; i += 1) {
       newValue.push(defaultValue);
     }
     onChange(newValue);
   } else if (value.length > count) {
-    const newValue = value;
+    const newValue = [...value];
     const fieldsToRemove = value.length - count;
-    for (let i = 0; 1 < fieldsToRemove; i += 1) {
+    for (let i = 0; i < fieldsToRemove; i += 1) {
       newValue.pop();
     }
     onChange(newValue);

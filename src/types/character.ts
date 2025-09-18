@@ -5,6 +5,21 @@ export type Command = {
   description: string;
   cp: number;
   stat: Stat;
+  isMastered?: boolean;
+  isSignature?: boolean;
+  isMirage?: boolean;
+  isShop?: boolean;
+}
+
+export type Provision = {
+  name: string;
+  description: string;
+  ip: number;
+  stat: Stat;
+  isMastered?: boolean;
+  isKeyItem?: boolean;
+  isMirage?: boolean;
+  isShop?: boolean;
 }
 
 export type Style = {
@@ -41,6 +56,7 @@ export type Character = {
   origin: Origin;
   style: Style;
   commands: Array<Command>;
+  provisions: Array<Provision>;
   resources: {
     hp: number;
     ip: number;
