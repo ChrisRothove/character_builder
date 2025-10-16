@@ -1,9 +1,10 @@
 import { Character } from "@app-types/character";
+import StyleInput from "./inputs/StyleInput";
 
 export function StylePanel({
   character,
-}: // updateCharacter,
-{
+  updateCharacter,
+}: {
   character: Character;
   updateCharacter: <K extends keyof Character>(
     key: K,
@@ -11,7 +12,7 @@ export function StylePanel({
   ) => void;
 }) {
   const {
-    // style,
+    style,
     advancements: { critRefineStyle },
   } = character;
 
@@ -19,10 +20,11 @@ export function StylePanel({
   return (
     <article className="adv-panel">
       <h2 className="preview-header">Style</h2>
-      <div className="command-list-item">
-        <span>Total Style Points</span>
-        <span>{count}</span>
-      </div>
+      <StyleInput
+        style={style}
+        max={count}
+        updateStyle={(newValue) => updateCharacter("style", newValue)}
+      />
     </article>
   );
 }

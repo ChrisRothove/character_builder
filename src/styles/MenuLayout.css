@@ -179,7 +179,7 @@
   padding: 0 0.4rem;
   display: flex;
   flex-direction: row;
-  align-items: baseline;
+  align-items: stretch;
   justify-content: space-between;
   background-color: var(--bright-blue);
   border-radius: 0.5rem 0 0.5rem 0;
@@ -189,6 +189,32 @@
   width: 100px;
   font-family: "lubrifont", sans-serif;
   font-size: medium;
+}
+.command-list-item input[type="text"] {
+  margin: 0.4rem 0;
+  margin-right: 0.4rem;
+  width: 200px;
+  font-family: "lubrifont", sans-serif;
+  font-size: medium;
+}
+.command-list-item textarea {
+  margin: 0.4rem 0;
+  width: 250px;
+  font-family: "lubrifont", sans-serif;
+  font-size: medium;
+}
+.crown-icon {
+  margin: 0 0.5rem;
+  filter: drop-shadow(1px 1px 4px var(--dark-blue));
+}
+.yellow-button {
+  background-color: transparent;
+  border: 0;
+  font-weight: 700;
+  color: var(--new-yellow);
+  font-family: "excelorate", sans-serif;
+  font-size: larger;
+  -webkit-text-stroke: 1px rgb(160, 77, 45);
 }
 
 .adv-panel {

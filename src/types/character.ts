@@ -1,26 +1,32 @@
 import { Stat, Origin, WeakRes, StatValue } from "./enums";
 
-export type Command = {
+export interface Command {
   name: string;
   description: string;
-  cp: number;
+  ip?: number;
+  cp?: number;
   stat: Stat;
   isMastered?: boolean;
+  isKeyItem?: boolean;
   isSignature?: boolean;
   isMirage?: boolean;
   isShop?: boolean;
 }
 
-export type Provision = {
+export interface Provision {
   name: string;
   description: string;
-  ip: number;
+  ip?: number;
+  cp?: number;
   stat: Stat;
   isMastered?: boolean;
   isKeyItem?: boolean;
+  isSignature?: boolean;
   isMirage?: boolean;
   isShop?: boolean;
 }
+
+export type Action = Command | Provision;
 
 export type Style = {
   name: string;
