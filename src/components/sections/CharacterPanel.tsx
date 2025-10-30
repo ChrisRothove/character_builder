@@ -67,20 +67,17 @@ export default function CharacterPanel({ character }: CharacterPanelProps) {
         <div className="char-images">
           <div
             style={{
-              backgroundImage:
-                'url("https://media3.giphy.com/media/zpCUgLwCBaZ1e/200w.gif?cid=6c09b952xe3ymsmm1e8alpf65elsbcal8h0531o51o24konq&ep=v1_gifs_search&rid=200w.gif&ct=g")',
+              backgroundImage: `url("${character.config.imageOne}")`,
             }}
           ></div>
           <div
             style={{
-              backgroundImage:
-                'url("https://rukminim2.flixcart.com/image/750/900/l1pc3gw0/poster/0/y/e/medium-aqua-kingdom-hearts-matte-finish-poster-butcutnw8632-original-imagd7d6jafteagn.jpeg?q=20&crop=false")',
+              backgroundImage: `url("${character.config.imageTwo}")`,
             }}
           ></div>
           <div
             style={{
-              backgroundImage:
-                'url("https://media1.tenor.com/images/93ca41721d94178e1bbc6075115f40b5/tenor.gif?itemid=12236710")',
+              backgroundImage: `url("${character.config.imageThree}")`,
             }}
           ></div>
         </div>

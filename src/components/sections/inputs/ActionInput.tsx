@@ -10,9 +10,17 @@ export default function ActionInput({
   action: Action;
   updateAction: (action: Action) => void;
 }) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const [newAction, setNewAction] = useState(action);
-  const { name, description, stat, isMastered, isMirage, isShop } = newAction;
+  const {
+    name,
+    description,
+    stat,
+    isMastered,
+    isMirage,
+    isShop,
+    isSubCommand,
+  } = newAction;
 
   const resKey = (newAction.ip || 0) > (newAction.cp || 0) ? "ip" : "cp";
   const res = (resKey === "ip" ? newAction.ip : newAction.cp) || 0;
@@ -74,6 +82,16 @@ export default function ActionInput({
               </option>
             ))}
           </select>
+        </label>
+        <br />
+        <label>
+          <input
+            type="checkbox"
+            name="isSub"
+            checked={isSubCommand}
+            onChange={() => update(!isSubCommand, "isSubCommand")}
+          ></input>
+          Sub Command
         </label>
         <br />
         <label>

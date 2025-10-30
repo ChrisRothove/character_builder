@@ -45,3 +45,9 @@ export enum WeakRes {
   Silence = 'Silence',
   Zombie = 'Zombie'
 }
+
+export enum LinkType {
+  Friend = 'Friend',
+  Enemy = 'Enemy',
+  Rival = 'Rival'
+}

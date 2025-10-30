@@ -1,4 +1,4 @@
-import { Stat, Origin, WeakRes, StatValue } from "./enums";
+import { Stat, Origin, WeakRes, StatValue, LinkType } from "./enums";
 
 export interface Command {
   name: string;
@@ -6,6 +6,7 @@ export interface Command {
   ip?: number;
   cp?: number;
   stat: Stat;
+  isSubCommand?: boolean;
   isMastered?: boolean;
   isKeyItem?: boolean;
   isSignature?: boolean;
@@ -19,6 +20,7 @@ export interface Provision {
   ip?: number;
   cp?: number;
   stat: Stat;
+  isSubCommand?: boolean;
   isMastered?: boolean;
   isKeyItem?: boolean;
   isSignature?: boolean;
@@ -42,6 +44,7 @@ export type Mastery = {
 
 export type Link = {
   name: string;
+  type: LinkType;
   rank: number;
   linkCommand?: Command;
   linkCommandTwo?: Command;
@@ -55,10 +58,28 @@ export type Journal = {
   url: string;
 }
 
+export type Timeline = {
+  name: string;
+  entries: Array<Journal>;
+};
+
+export type Config = {
+  primaryColor: string;
+  secondaryColor: string;
+  accentColor: string;
+  showMirage: boolean;
+  showLinks: boolean;
+  showTimelines: boolean;
+  imageOne: string;
+  imageTwo?: string;
+  imageThree?: string;
+}
+
 export type Character = {
+  id: number;
+  config: Config;
   name: string;
   deckName: string;
-  posts: number;
   origin: Origin;
   style: Style;
   commands: Array<Command>;
@@ -97,5 +118,5 @@ export type Character = {
     critProvision: number;
   };
   links: Array<Link>;
-  journalEntries: Array<Journal>;
+  journalEntries: Array<Timeline>;
 }

@@ -10,6 +10,9 @@ import { MasteriesPanel } from "@components/sections/MasteriesPanel";
 import { StylePanel } from "@components/sections/StylePanel";
 import { CommandsPanel } from "@components/sections/CommandsPanel";
 import { ProvisionsPanel } from "@components/sections/ProvisionsPanel";
+import LinksPanel from "@components/sections/LinksPanel";
+import JournalPanel from "@components/sections/JournalPanel";
+import DataPanel from "@components/sections/DataPanel";
 
 type MenuLayoutProps = {
   characters: Array<Character>;
@@ -26,7 +29,6 @@ enum MenuPage {
   PROVISIONS = "- Provisions",
   LINKS = "- Links",
   JOURNAL = "- Journal",
-  CONFIG = "- Config",
   DATA = "- Data",
 }
 
@@ -46,13 +48,17 @@ export default function MenuLayout({
   };
   const {
     updateCharacter,
-    // getCharacterData,
-    // selectCharacter,
-    currentCharacter,
+    getCharacterData,
+    selectCharacter,
+    addCharacter,
+    currentCharacterIndex,
   } = useCharacters({
     characters,
     setCharacters,
   });
+  const currentCharacters = getCharacterData();
+  const currentCharacter = currentCharacters[currentCharacterIndex];
+
   return (
     <main className="menu-wrapper">
       <header className="menu-header">
@@ -72,7 +78,6 @@ export default function MenuLayout({
           <button onClick={setNewPage(MenuPage.PROVISIONS)}>Provisions</button>
           <button onClick={setNewPage(MenuPage.LINKS)}>Links</button>
           <button onClick={setNewPage(MenuPage.JOURNAL)}>Journal</button>
-          <button onClick={setNewPage(MenuPage.CONFIG)}>Config</button>
           <button onClick={setNewPage(MenuPage.DATA)}>Data</button>
         </article>
         {menuPage === MenuPage.HOME && (
@@ -115,6 +120,27 @@ export default function MenuLayout({
           <ProvisionsPanel
             character={currentCharacter}
             updateCharacter={updateCharacter}
+          />
+        )}
+        {menuPage === MenuPage.LINKS && (
+          <LinksPanel
+            character={currentCharacter}
+            updateCharacter={updateCharacter}
+          />
+        )}
+        {menuPage === MenuPage.JOURNAL && (
+          <JournalPanel
+            character={currentCharacter}
+            updateCharacter={updateCharacter}
+          />
+        )}
+        {menuPage === MenuPage.DATA && (
+          <DataPanel
+            characters={currentCharacters}
+            updateCharacter={updateCharacter}
+            selectCharacter={selectCharacter}
+            addCharacter={addCharacter}
+            currentCharacterIndex={currentCharacterIndex}
           />
         )}
       </section>

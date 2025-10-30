@@ -1,9 +1,22 @@
-import { Character } from "@app-types/character";
+import { Character, Provision } from "@app-types/character";
+import ActionInput from "./inputs/ActionInput";
+import { Stat } from "@app-types/enums";
+
+const DEFAULT_PROVISION = {
+  name: "New Provision",
+  description: "description",
+  ip: 1,
+  stat: Stat.NONE,
+  isMastered: false,
+  isKeyItem: false,
+  isMirage: false,
+  isShop: false,
+};
 
 export function ProvisionsPanel({
   character,
-}: // updateCharacter,
-{
+  updateCharacter,
+}: {
   character: Character;
   updateCharacter: <K extends keyof Character>(
     key: K,
@@ -26,6 +39,19 @@ export function ProvisionsPanel({
   const sigMax = critKeyItem ? 1 : 0;
   const masteredMax = plusMasteredCommand + critMasteredCommand;
   const max = critProvision + plusProvision + masteredMax;
+
+  const updateProvisions = (newProvision: Provision, index: number) => {
+    const newProvisions = [...provisions];
+    newProvisions[index] = newProvision;
+    updateCharacter("provisions", newProvisions);
+  };
+
+  const addNewProvision = () => {
+    const newProvisions = [...provisions];
+    newProvisions.push(DEFAULT_PROVISION);
+    updateCharacter("provisions", newProvisions);
+  };
+
   return (
     <article className="adv-panel">
       <h2 className="preview-header">Provisions</h2>
@@ -43,6 +69,15 @@ export function ProvisionsPanel({
           Signature: {totalKey.length}/{sigMax}
         </span>
       </div>
+      {provisions.map((provision, idx) => (
+        <ActionInput
+          action={provision}
+          updateAction={(action: Provision) => updateProvisions(action, idx)}
+        />
+      ))}
+      <button className="new-button" onClick={addNewProvision}>
+        <span>+</span>
+      </button>
     </article>
   );
 }

@@ -5,9 +5,18 @@ import { useEffect, useState } from "react";
 
 const LS_KEY = 'characters'
 const DEFAULT_CHARACTER: Character = {
+  id: 1,
+  config: {
+    primaryColor: "darkslategray",
+    secondaryColor: "silver",
+    accentColor: "white",
+    showMirage: false,
+    showLinks: false,
+    showTimelines: false,
+    imageOne: 'https://64.media.tumblr.com/c59b9e44efc7ba07877da0a27e97f3a8/466eed8a1d0125ae-f7/s540x810/5a7164e58b7e67af33bea7728151ea5b9456883b.gif'
+  },
   name: 'Character Name',
   deckName: 'Deck Name',
-  posts: 0,
   origin: Origin.novice,
   style: {
     name: 'Style Name',
@@ -69,7 +78,7 @@ export default function useCharacters(characterData: {characters: Array<Characte
 
   const updateCharacter = <K extends keyof Character>(key: K, value: Character[K]): void => {
     const localStorageCharacters = getLocalCharacters();
-    console.log(key, value)
+    
     const newCharacter: Character = {
       ...localStorageCharacters[index],
       [key]: value
@@ -88,10 +97,20 @@ export default function useCharacters(characterData: {characters: Array<Characte
     setIndex(newIndex);
   }
 
+  const addCharacter = () => {
+    const localStorageCharacters = getLocalCharacters();
+    const newCharacter = { ...DEFAULT_CHARACTER, id: localStorageCharacters.length + 1 || 1 }
+    localStorageCharacters.push(newCharacter);
+
+    localStorage.setItem(LS_KEY, JSON.stringify(localStorageCharacters));
+    characterData.setCharacters(localStorageCharacters);
+  }
+
   return {
     updateCharacter,
     getCharacterData,
     selectCharacter,
-    currentCharacter: getLocalCharacters()[0] || DEFAULT_CHARACTER
+    addCharacter,
+    currentCharacterIndex: index
   }
 }

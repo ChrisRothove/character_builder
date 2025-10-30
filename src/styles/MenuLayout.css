@@ -216,9 +216,16 @@
   font-size: larger;
   -webkit-text-stroke: 1px rgb(160, 77, 45);
 }
+.yellow-button:disabled {
+  opacity: 0.5;
+}
 
 .adv-panel {
   flex-grow: 1;
+  max-height: 60vh;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--dark-blue) var(--bright-blue);
 }
 .counter-buttons {
   width: 100px;
@@ -248,4 +255,19 @@
 .new-button:hover {
   background: linear-gradient(transparent, crimson);
   border: 1px outset crimson;
+}
+.new-button:disabled {
+  opacity: 0.5;
+}
+
+.save,
+.save-closed {
+  min-height: 60px;
+  background-repeat: no-repeat;
+  background-blend-mode: overlay;
+  background-position: left;
+  background-size: contain;
+}
+.save-closed {
+  background-size: cover;
 }

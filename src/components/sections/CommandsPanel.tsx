@@ -2,7 +2,7 @@ import { Character, Command } from "@app-types/character";
 import ActionInput from "./inputs/ActionInput";
 import { Stat } from "@app-types/enums";
 
-const DEFAULT_COMMAND = {
+export const DEFAULT_COMMAND = {
   name: "New Command",
   description: "description",
   cp: 3,
