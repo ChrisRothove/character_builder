@@ -13,6 +13,9 @@ import { ProvisionsPanel } from "@components/sections/ProvisionsPanel";
 import LinksPanel from "@components/sections/LinksPanel";
 import JournalPanel from "@components/sections/JournalPanel";
 import DataPanel from "@components/sections/DataPanel";
+import useModal from "@components/hooks/useModal";
+import { useMediaQuery } from "usehooks-ts";
+import Bars from "@assets/bars.svg";
 
 type MenuLayoutProps = {
   characters: Array<Character>;
@@ -56,97 +59,179 @@ export default function MenuLayout({
     characters,
     setCharacters,
   });
+  const { ModalContext, modalData } = useModal();
+  const isMobile = useMediaQuery("(max-width: 440px)");
+
   const currentCharacters = getCharacterData();
   const currentCharacter = currentCharacters[currentCharacterIndex];
 
   return (
-    <main className="menu-wrapper">
-      <header className="menu-header">
-        <h1>MENU</h1>
-        <h2>Command System Character Builder {menuPage}</h2>
-      </header>
-      <section className="menu-body">
-        <article className="opt-buttons">
-          <button onClick={setNewPage(MenuPage.HOME)}>Home</button>
-          <button onClick={setNewPage(MenuPage.ADVANCEMENTS)}>
-            Advancements
-          </button>
-          <button onClick={setNewPage(MenuPage.STATS)}>Stats</button>
-          <button onClick={setNewPage(MenuPage.MASTERIES)}>Masteries</button>
-          <button onClick={setNewPage(MenuPage.STYLE)}>Style</button>
-          <button onClick={setNewPage(MenuPage.COMMANDS)}>Commands</button>
-          <button onClick={setNewPage(MenuPage.PROVISIONS)}>Provisions</button>
-          <button onClick={setNewPage(MenuPage.LINKS)}>Links</button>
-          <button onClick={setNewPage(MenuPage.JOURNAL)}>Journal</button>
-          <button onClick={setNewPage(MenuPage.DATA)}>Data</button>
-        </article>
-        {menuPage === MenuPage.HOME && (
-          <CharacterPanel character={currentCharacter} />
+    <ModalContext.Provider value={modalData}>
+      <main className="menu-wrapper">
+        <header className="menu-header">
+          <h1>MENU</h1>
+          {!isMobile && <h2>Command System Character Builder {menuPage}</h2>}
+          {isMobile && (
+            <button
+              className="icon-button"
+              onClick={() =>
+                modalData.openModal({
+                  title: "Pages",
+                  actions: [
+                    {
+                      label: "Home",
+                      function: setNewPage(MenuPage.HOME),
+                    },
+                    {
+                      label: "Advancements",
+                      function: setNewPage(MenuPage.ADVANCEMENTS),
+                    },
+                    {
+                      label: "Stats",
+                      function: setNewPage(MenuPage.STATS),
+                    },
+                    {
+                      label: "Masteries",
+                      function: setNewPage(MenuPage.MASTERIES),
+                    },
+                    {
+                      label: "Style",
+                      function: setNewPage(MenuPage.STYLE),
+                    },
+                    {
+                      label: "Commands",
+                      function: setNewPage(MenuPage.COMMANDS),
+                    },
+                    {
+                      label: "Provisions",
+                      function: setNewPage(MenuPage.PROVISIONS),
+                    },
+                    {
+                      label: "Links",
+                      function: setNewPage(MenuPage.LINKS),
+                    },
+                    {
+                      label: "Journal",
+                      function: setNewPage(MenuPage.JOURNAL),
+                    },
+                    {
+                      label: "Data",
+                      function: setNewPage(MenuPage.DATA),
+                    },
+                  ],
+                })
+              }
+            >
+              <img width="40rem" className="crown-icon" src={Bars} alt="bars" />
+            </button>
+          )}
+        </header>
+        <section className="menu-body">
+          {!isMobile && (
+            <article className="opt-buttons">
+              <button onClick={setNewPage(MenuPage.HOME)}>Home</button>
+              <button onClick={setNewPage(MenuPage.ADVANCEMENTS)}>
+                Advancements
+              </button>
+              <button onClick={setNewPage(MenuPage.STATS)}>Stats</button>
+              <button onClick={setNewPage(MenuPage.MASTERIES)}>
+                Masteries
+              </button>
+              <button onClick={setNewPage(MenuPage.STYLE)}>Style</button>
+              <button onClick={setNewPage(MenuPage.COMMANDS)}>Commands</button>
+              <button onClick={setNewPage(MenuPage.PROVISIONS)}>
+                Provisions
+              </button>
+              <button onClick={setNewPage(MenuPage.LINKS)}>Links</button>
+              <button onClick={setNewPage(MenuPage.JOURNAL)}>Journal</button>
+              <button onClick={setNewPage(MenuPage.DATA)}>Data</button>
+            </article>
+          )}
+          {menuPage === MenuPage.HOME && (
+            <CharacterPanel character={currentCharacter} />
+          )}
+          {menuPage === MenuPage.HOME && (
+            <DeckPanel character={currentCharacter} />
+          )}
+          {menuPage === MenuPage.ADVANCEMENTS && (
+            <AdvPanel
+              character={currentCharacter}
+              updateCharacter={updateCharacter}
+            />
+          )}
+          {menuPage === MenuPage.STATS && (
+            <StatPanel
+              character={currentCharacter}
+              updateCharacter={updateCharacter}
+            />
+          )}
+          {menuPage === MenuPage.MASTERIES && (
+            <MasteriesPanel
+              character={currentCharacter}
+              updateCharacter={updateCharacter}
+            />
+          )}
+          {menuPage === MenuPage.STYLE && (
+            <StylePanel
+              character={currentCharacter}
+              updateCharacter={updateCharacter}
+            />
+          )}
+          {menuPage === MenuPage.COMMANDS && (
+            <CommandsPanel
+              character={currentCharacter}
+              updateCharacter={updateCharacter}
+            />
+          )}
+          {menuPage === MenuPage.PROVISIONS && (
+            <ProvisionsPanel
+              character={currentCharacter}
+              updateCharacter={updateCharacter}
+            />
+          )}
+          {menuPage === MenuPage.LINKS && (
+            <LinksPanel
+              character={currentCharacter}
+              updateCharacter={updateCharacter}
+            />
+          )}
+          {menuPage === MenuPage.JOURNAL && (
+            <JournalPanel
+              character={currentCharacter}
+              updateCharacter={updateCharacter}
+            />
+          )}
+          {menuPage === MenuPage.DATA && (
+            <DataPanel
+              characters={currentCharacters}
+              updateCharacter={updateCharacter}
+              selectCharacter={selectCharacter}
+              addCharacter={addCharacter}
+              currentCharacterIndex={currentCharacterIndex}
+            />
+          )}
+        </section>
+        {!isMobile && (
+          <footer className="menu-footer">
+            <p>Choose a Sub-menu.</p>
+          </footer>
         )}
-        {menuPage === MenuPage.HOME && (
-          <DeckPanel character={currentCharacter} />
+        {modalData.isOpen && (
+          <div className="modal">
+            <h1>{modalData.config.title}</h1>
+            {modalData.config.subtitle && <h3>{modalData.config.subtitle}</h3>}
+            {modalData.config.actions.map((action) => (
+              <button
+                className="modal-button"
+                key={action.label}
+                onClick={action.function}
+              >
+                <h2>{action.label}</h2>
+              </button>
+            ))}
+          </div>
         )}
-        {menuPage === MenuPage.ADVANCEMENTS && (
-          <AdvPanel
-            character={currentCharacter}
-            updateCharacter={updateCharacter}
-          />
-        )}
-        {menuPage === MenuPage.STATS && (
-          <StatPanel
-            character={currentCharacter}
-            updateCharacter={updateCharacter}
-          />
-        )}
-        {menuPage === MenuPage.MASTERIES && (
-          <MasteriesPanel
-            character={currentCharacter}
-            updateCharacter={updateCharacter}
-          />
-        )}
-        {menuPage === MenuPage.STYLE && (
-          <StylePanel
-            character={currentCharacter}
-            updateCharacter={updateCharacter}
-          />
-        )}
-        {menuPage === MenuPage.COMMANDS && (
-          <CommandsPanel
-            character={currentCharacter}
-            updateCharacter={updateCharacter}
-          />
-        )}
-        {menuPage === MenuPage.PROVISIONS && (
-          <ProvisionsPanel
-            character={currentCharacter}
-            updateCharacter={updateCharacter}
-          />
-        )}
-        {menuPage === MenuPage.LINKS && (
-          <LinksPanel
-            character={currentCharacter}
-            updateCharacter={updateCharacter}
-          />
-        )}
-        {menuPage === MenuPage.JOURNAL && (
-          <JournalPanel
-            character={currentCharacter}
-            updateCharacter={updateCharacter}
-          />
-        )}
-        {menuPage === MenuPage.DATA && (
-          <DataPanel
-            characters={currentCharacters}
-            updateCharacter={updateCharacter}
-            selectCharacter={selectCharacter}
-            addCharacter={addCharacter}
-            currentCharacterIndex={currentCharacterIndex}
-          />
-        )}
-      </section>
-      <footer className="menu-footer">
-        <p>Choose a Sub-menu.</p>
-      </footer>
-    </main>
+      </main>
+    </ModalContext.Provider>
   );
 }
