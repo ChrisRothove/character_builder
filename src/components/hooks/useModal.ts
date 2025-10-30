@@ -1,12 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { ModalAction } from "@app-types/modalActions";
-import {
-  createContext,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { createContext, useCallback, useMemo, useState } from "react";
 
 type ModalConfig = {
   title: string;
@@ -63,11 +57,6 @@ export default function useModal() {
     [config, open]
   );
   const ModalContext = createContext<ModalContextData>(modalData);
-
-  // remove this after dev
-  useEffect(() => {
-    openModal(DEFAULT_CONFIG);
-  }, []);
 
   return {
     ModalContext,
